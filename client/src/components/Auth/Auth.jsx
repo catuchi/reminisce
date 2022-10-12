@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import {
-  AppBar,
   Button,
   Paper,
   Grid,
   Typography,
   Container,
   Avatar,
-  TextField,
 } from "@material-ui/core";
 import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
@@ -16,13 +14,23 @@ import Icon from "./icon";
 import { useHistory } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Input from "./Input";
+import { signin, signup } from "../../actions/auth";
 
 import useStyles from "./styles";
+
+const initialState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 const Auth = () => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -31,9 +39,18 @@ const Auth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (isSignUp) {
+      dispatch(signup(formData, history));
+    } else {
+      dispatch(signin(formData, history));
+    }
+    console.log(formData);
   };
 
-  const handleChange = () => {};
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const switchMode = () => {
     setIsSignUp((prevIsSignUp) => !prevIsSignUp);
