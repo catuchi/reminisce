@@ -45,7 +45,7 @@ const Auth = () => {
     } else {
       dispatch(signin(formData, history));
     }
-    console.log(formData);
+    // console.log(formData);
   };
 
   const handleChange = (e) => {
