@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Paper,
@@ -33,6 +33,12 @@ const Auth = () => {
   const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch();
   const history = useHistory();
+
+  useEffect(() => {
+    gapi.load("client:auth2", () => {
+      gapi.auth2.init({ client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID });
+    });
+  }, []);
 
   const handleShowPassword = () =>
     setShowPassword((prevShowPassword) => !prevShowPassword);
