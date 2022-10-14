@@ -1,3 +1,9 @@
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -33,3 +39,16 @@ mongoose
   .catch((error) => console.log(error));
 
 // mongoose.set("useFindAndModify", false);
+
+// Serve client
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(
+      path.resolve(__dirname, "../", "client", "build", "index.html")
+    )
+  );
+} else {
+  app.get("/", (req, res) => res.send("Please set to production"));
+}
