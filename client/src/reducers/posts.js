@@ -8,6 +8,7 @@ import {
   START_LOADING,
   END_LOADING,
   FETCH_POST,
+  COMMENT,
 } from "../constants/actionTypes";
 
 export default (state = { isLoading: true, posts: [] }, action) => {
@@ -29,6 +30,17 @@ export default (state = { isLoading: true, posts: [] }, action) => {
       return { ...state, post: action.payload };
     case CREATE:
       return { ...state, posts: [...state.posts, action.payload] };
+    case COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post._id === action.payload._id) {
+            return action.payload;
+          }
+
+          return post;
+        }),
+      };
     case UPDATE:
     case LIKE:
       return {
