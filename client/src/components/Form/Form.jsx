@@ -58,7 +58,7 @@ const Form = ({ currentId, setCurrentId }) => {
   }
 
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} elevation={6}>
       <form
         autoComplete="off"
         noValidate
@@ -68,16 +68,6 @@ const Form = ({ currentId, setCurrentId }) => {
         <Typography variant="h6">
           {currentId ? "Editing" : "Creating"} a Memory
         </Typography>
-        {/* <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={postData.creator}
-          onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
-          }
-        /> */}
         <TextField
           name="title"
           variant="outlined"
@@ -91,6 +81,8 @@ const Form = ({ currentId, setCurrentId }) => {
           variant="outlined"
           label="Message"
           fullWidth
+          multiline
+          rows={4}
           value={postData.message}
           onChange={(e) =>
             setPostData({ ...postData, message: e.target.value })
@@ -99,7 +91,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name="tags"
           variant="outlined"
-          label="Tags"
+          label="Tags (comma separated)"
           fullWidth
           value={postData.tags}
           onChange={(e) =>
