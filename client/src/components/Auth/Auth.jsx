@@ -36,7 +36,7 @@ const Auth = () => {
 
   useEffect(() => {
     gapi.load("client:auth2", () => {
-      gapi.auth2.init({ client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID });
+      gapi.auth2.init({ clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID });
     });
   }, []);
 
