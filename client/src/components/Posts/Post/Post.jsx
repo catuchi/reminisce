@@ -6,6 +6,7 @@ import {
   CardMedia,
   Button,
   Typography,
+  // ButtonBase,
 } from "@material-ui/core";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
@@ -14,13 +15,19 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from "moment";
 import useStyles from "./styles";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { deletePost, likePost } from "../../../actions/posts";
 
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = JSON.parse(localStorage.getItem("profile"));
+
+  const openPost = () => {
+    history.push(`/posts/${post._id}`);
+  };
 
   const Likes = () => {
     if (post.likes.length > 0) {
@@ -52,6 +59,7 @@ const Post = ({ post, setCurrentId }) => {
 
   return (
     <Card className={classes.card} raised elevation={6}>
+      {/* <ButtonBase className={classes.cardActions} onClick={openPost}> */}
       <CardMedia
         className={classes.media}
         image={post.selectedFile}
@@ -95,6 +103,7 @@ const Post = ({ post, setCurrentId }) => {
           {post.message}
         </Typography>
       </CardContent>
+      {/* </ButtonBase> */}
       <CardActions className={classes.cardActions}>
         <Button
           size="small"
@@ -103,6 +112,14 @@ const Post = ({ post, setCurrentId }) => {
           onClick={() => dispatch(likePost(post._id))}
         >
           <Likes />
+        </Button>
+        <Button
+          size="small"
+          color="primary"
+          // disabled={!user?.result}
+          onClick={openPost}
+        >
+          More
         </Button>
         {(user?.result?.googleId === post?.creator ||
           user?.result?._id === post?.creator) && (
