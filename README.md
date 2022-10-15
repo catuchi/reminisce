@@ -12,6 +12,39 @@ Full stack social media application with Google authentication, pagination, comm
 
 **Others:** Axios, JWT, Google OAuth, Heroku
 
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone git@github.com:catuchi/reminisce.git
+```
+
+Go to the project directory
+
+```bash
+  cd my-project
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+Start the client
+
+```bash
+  cd client
+  npm start
+```
+
 ## Demo
 
 This app is deployed on Heroku. https://reminiscemern.herokuapp.com
